@@ -31,6 +31,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is configured to automatically deploy to Vercel using GitHub Actions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Automatic Deployment Setup
+
+The repository includes a GitHub Actions workflow (`.github/workflows/deploy-vercel.yml`) that automatically:
+- Deploys to **production** when code is pushed to the `main` branch
+- Creates **preview deployments** for pull requests
+
+### Required GitHub Secrets
+
+To enable automatic deployments, you need to add the following secrets to your GitHub repository:
+
+1. **`VERCEL_TOKEN`**: Your Vercel authentication token
+   - Get it from: https://vercel.com/account/tokens
+   
+2. **`VERCEL_ORG_ID`**: Your Vercel organization ID
+   - Found in your Vercel project settings or `.vercel/project.json` after running `vercel link`
+   
+3. **`VERCEL_PROJECT_ID`**: Your Vercel project ID
+   - Found in your Vercel project settings or `.vercel/project.json` after running `vercel link`
+
+### How to Set Up Secrets
+
+1. Go to your GitHub repository
+2. Navigate to **Settings** → **Secrets and variables** → **Actions**
+3. Click **New repository secret**
+4. Add each of the three secrets listed above
+
+### Getting Vercel IDs
+
+To get your `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`:
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Link your project
+vercel link
+
+# The IDs will be saved in .vercel/project.json
+cat .vercel/project.json
+```
+
+### Manual Deployment
+
+You can still deploy manually using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
